@@ -37,5 +37,6 @@ public class MyFirstTestCase {
 
                 driver.findElement(By.cssSelector(".product-name a")).getText(),"Blue Shoes");
         driver.findElement(By.cssSelector(".checkout-button.button.alt.wc-forward")).click();
+        driver.quit();
     }
 }
