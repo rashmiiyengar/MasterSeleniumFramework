@@ -22,7 +22,6 @@ public class MyFirstTestCase {
         driver.findElement(By.xpath("//input[@id='woocommerce-product-search-field-0']")).sendKeys("blue");
         driver.findElement(By.xpath("//button[@type='submit' and @value='Search']")).click();
         Assert.assertEquals(
-
                 driver.findElement(By.xpath("//h1[contains(text(),'Search results: “blue”')]")).getText(),
                 "Search results: “blue”"
         );
