@@ -1,22 +1,32 @@
 package org.selenium;
 
+import org.bouncycastle.util.Store;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.pages.HomePage;
+import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class MyFirstTestCase {
+public class MyFirstTestCase extends BaseTest {
 
-    private WebDriver driver;
+
     @Test
     public void guestCheckoutUsingDirectBankTransfer(){
-
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
         driver.get("https://askomdch.com");
-        driver.manage().window().maximize();
+
+        HomePage homePage = new HomePage(driver);
+        StorePage storePage= homePage.clickStoreMenuLink();
+        storePage.
+                 enterTextInSearchField("blue").
+                 clickSearchBtn();
+        //storePage.clickSearchBtn();
+        Assert.assertEquals(storePage.getTitle(),"Search results: “blue”");
+        storePage.clickAddtoCartBtn();
+
+
+
+
 
         driver.findElement(By.xpath("//li[@id='menu-item-1227']")).click();
         driver.findElement(By.xpath("//input[@id='woocommerce-product-search-field-0']")).sendKeys("blue");
@@ -36,6 +46,6 @@ public class MyFirstTestCase {
 
                 driver.findElement(By.cssSelector(".product-name a")).getText(),"Blue Shoes");
         driver.findElement(By.cssSelector(".checkout-button.button.alt.wc-forward")).click();
-        driver.quit();
+
     }
 }
