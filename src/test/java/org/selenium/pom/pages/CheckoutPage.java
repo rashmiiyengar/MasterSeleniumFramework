@@ -2,7 +2,11 @@ package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.objects.BillingAddress;
 
 public class CheckoutPage extends BasePage {
 
@@ -60,10 +64,21 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public CheckoutPage clickPlaceOrder(){
+    public ConfirmationPage clickPlaceOrder(){
 
         driver.findElement(placeOrder).click();
-        return this;
+        return new ConfirmationPage(driver);
+    }
+
+    public CheckoutPage setBillingAddress(BillingAddress billingAddress){
+
+      return  sendFirstName(billingAddress.getFirstName()).
+                sendLastName(billingAddress.getLastName()).
+                        sendBillingAddress(billingAddress.getAddressLineOne()).
+                            sendBillingCity(billingAddress.getCity()).
+                                sendBillingPostcode(billingAddress.getPostalCode()).
+                                    sendBillingEmail(billingAddress.getEmail());
+
     }
 
 }
