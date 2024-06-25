@@ -17,9 +17,8 @@ public class BillingAddress {
         this.city = city;
         this.postalCode = postalCode;
         this.email=email;
-
-
     }
+
     public BillingAddress(){
 
     }

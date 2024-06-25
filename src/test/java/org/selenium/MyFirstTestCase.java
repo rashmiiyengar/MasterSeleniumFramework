@@ -5,8 +5,12 @@ import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.pages.*;
+import org.selenium.pom.utils.JacksonUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MyFirstTestCase extends BaseTest {
 
@@ -45,15 +49,17 @@ public class MyFirstTestCase extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutToConfirmation() throws InterruptedException {
+    public void loginAndCheckoutToConfirmation() throws InterruptedException, IOException {
         //using POJO Object
-        BillingAddress billingAddress = new BillingAddress();
-        billingAddress.setFirstName("Sairam1").
-                setLastName("ram").
-                setAddressLineOne("chulavista").
-                setCity("montana").
-                setPostalCode("56567").
-                setEmail("sairam@gmail.com");
+
+//        billingAddress.setFirstName("Sairam1").
+//                setLastName("ram").
+//                setAddressLineOne("chulavista").
+//                setCity("montana").
+//                setPostalCode("56567").
+//                setEmail("sairam@gmail.com");
+
+        BillingAddress billingAddress=JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
 
         HomePage homePage = new HomePage(driver).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
@@ -75,6 +81,5 @@ public class MyFirstTestCase extends BaseTest {
                 setBillingAddress(billingAddress);
         Thread.sleep(2000);
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
-
     }
 }
