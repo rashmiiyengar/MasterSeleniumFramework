@@ -4,6 +4,7 @@ import org.bouncycastle.util.Store;
 import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
+import org.selenium.pom.objects.Product;
 import org.selenium.pom.pages.*;
 import org.selenium.pom.utils.JacksonUtil;
 import org.testng.Assert;
@@ -49,7 +50,7 @@ public class MyFirstTestCase extends BaseTest {
     }
 
     @Test
-    public void loginAndCheckoutToConfirmation() throws InterruptedException, IOException {
+    public void checkoutToConfirmation() throws InterruptedException, IOException {
         //using POJO Object
 
 //        billingAddress.setFirstName("Sairam1").
@@ -60,13 +61,15 @@ public class MyFirstTestCase extends BaseTest {
 //                setEmail("sairam@gmail.com");
 
         BillingAddress billingAddress=JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
+        Product product = new Product(1215);
 
         HomePage homePage = new HomePage(driver).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
         Thread.sleep(2000);
-        storePage.clickAddtoCartBtn("Blue Shoes");
+        //storePage.clickAddtoCartBtn("Blue Shoes");
+        storePage.clickAddtoCartBtn(product.getName());
         Thread.sleep(5000);
         CartPage cartpage = storePage.clickViewCarkLink();
 
@@ -76,10 +79,12 @@ public class MyFirstTestCase extends BaseTest {
             throw new RuntimeException(e);
         }
 
-        Assert.assertEquals(cartpage.getProductName(),"Blue Shoes");
+        Assert.assertEquals(cartpage.getProductName(),product.getName());
         CheckoutPage checkoutPage = cartpage.clickCheckoutBtn().
                 setBillingAddress(billingAddress);
         Thread.sleep(2000);
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }
+
 }
+
