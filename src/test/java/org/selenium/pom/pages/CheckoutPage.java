@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
 
+import java.time.Duration;
+import java.util.List;
+
 public class CheckoutPage extends BasePage {
 
     private final By firstName = By.xpath("//input[@id='billing_first_name']");
@@ -19,10 +22,13 @@ public class CheckoutPage extends BasePage {
     private final By billingEmail = By.xpath("//input[@id='billing_email']");
     private final By billingPhone = By.xpath("//input[@id='billing_phone']");
     private final By placeOrder = By.xpath("//button[@id='place_order']");
+
     private final By clickLogin = By.cssSelector(".showlogin");
     private final By loginFirstname = By.xpath("//input[@id=\"username\"]");
     private final By loginPassword = By.xpath("//input[@id=\"password\"]");
     private final By loginBtn = By.cssSelector(".woocommerce-button.button.woocommerce-form-login__submit");
+
+    private final By overLay = By.cssSelector(".blockUI.blockOverlay");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -93,12 +99,10 @@ public class CheckoutPage extends BasePage {
     }
 
     public ConfirmationPage clickPlaceOrder(){
-
+        waitForElementToDisappear(overLay);
         driver.findElement(placeOrder).click();
         return new ConfirmationPage(driver);
     }
-
-
 
     public CheckoutPage setBillingAddress(BillingAddress billingAddress){
 

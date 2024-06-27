@@ -20,10 +20,9 @@ public class HomePage extends BasePage {
         load("/");
         return this;
     }
+
 //    public void clickStoreMenuLink(){
 //        driver.findElement(storeMenuLink).click();
 //
 //    }
-
-
 }

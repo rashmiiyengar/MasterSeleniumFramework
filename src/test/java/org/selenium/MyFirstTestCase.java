@@ -15,23 +15,15 @@ import java.io.InputStream;
 
 public class MyFirstTestCase extends BaseTest {
 
-
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
         HomePage homePage = new HomePage(driver).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
-        Thread.sleep(2000);
         storePage.clickAddtoCartBtn("Blue Shoes");
-        Thread.sleep(5000);
-        CartPage cartpage = storePage.clickViewCarkLink();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        CartPage cartpage = storePage.clickViewCarkLink();
 
         Assert.assertEquals(cartpage.getProductName(),"Blue Shoes");
         CheckoutPage checkoutPage = cartpage.clickCheckoutBtn();
@@ -46,7 +38,6 @@ public class MyFirstTestCase extends BaseTest {
                 sendBillingEmail("sai@gmail.com");
                 Thread.sleep(2000);
                 ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
-
     }
 
     @Test
