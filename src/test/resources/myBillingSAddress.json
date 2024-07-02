@@ -1,8 +1,10 @@
 {
   "firstName": "Sairam",
   "lastName": "1",
-  "addressLineOne": "Illinos",
-  "city": "Illinos",
-  "postalCode": "567567",
+  "country": "United States (US)",
+  "addressLineOne": "Pune",
+  "city": "Pune",
+  "county": "Alaska",
+  "postalCode": "411001",
   "email": "sairam@gmail.com"
 }

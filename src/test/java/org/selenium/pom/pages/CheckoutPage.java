@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
@@ -22,6 +23,8 @@ public class CheckoutPage extends BasePage {
     private final By billingEmail = By.xpath("//input[@id='billing_email']");
     private final By billingPhone = By.xpath("//input[@id='billing_phone']");
     private final By placeOrder = By.xpath("//button[@id='place_order']");
+    private final By countryDropdown = By.id("billing_country");
+    private final By countyDropdown = By.id("select2-billing_state-container");
 
     private final By clickLogin = By.cssSelector(".showlogin");
     private final By loginFirstname = By.xpath("//input[@id=\"username\"]");
@@ -35,21 +38,40 @@ public class CheckoutPage extends BasePage {
     }
 
     public  CheckoutPage sendFirstName(String firstNameTxt){
-        driver.findElement(firstName).clear();
-        driver.findElement(firstName).sendKeys(firstNameTxt);
+        WebElement e= waitLong.until(ExpectedConditions.visibilityOfElementLocated((firstName)));
+        e.clear();
+        e.sendKeys(firstNameTxt);
+        //using get element method created in base class
+
         return this;
     }
 
     public  CheckoutPage sendLastName(String lastNameTxt){
-        driver.findElement(lastName).clear();
-        driver.findElement(lastName).sendKeys(lastNameTxt);
+        WebElement e= waitLong.until(ExpectedConditions.visibilityOfElementLocated((lastName)));
+        e.clear();
+        e.sendKeys(lastNameTxt);
         return this;
     }
 
     public  CheckoutPage sendBillingCompany(String billingCompanyTxt){
-        driver.findElement(billingCompany).clear();
-        driver.findElement(billingCompany).sendKeys(billingCompanyTxt);
+        WebElement e=waitLong.until(ExpectedConditions.visibilityOfElementLocated((billingCompany)));
+        e.clear();
+        e.sendKeys(billingCompanyTxt);
         return this;
+    }
+
+    public CheckoutPage selectCountry(String countryName){
+
+        Select select = new Select(driver.findElement(countryDropdown));
+        select.selectByVisibleText(countryName);
+        return  this;
+    }
+
+    public CheckoutPage selectCounty(String countyName){
+
+        Select select = new Select(driver.findElement(countyDropdown));
+        select.selectByVisibleText(countyName);
+        return  this;
     }
 
     public  CheckoutPage sendBillingAddress(String billingAddressTxt){
@@ -83,7 +105,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage clickLoginLink(){
-        driver.findElement(clickLogin).click();
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(clickLogin)).click();
         return this;
     }
 
@@ -94,7 +116,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage clickLoginButton(){
-        driver.findElement(loginBtn).click();
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(loginBtn)).click();
         return this;
     }
 
@@ -108,10 +130,12 @@ public class CheckoutPage extends BasePage {
 
       return  sendFirstName(billingAddress.getFirstName()).
                 sendLastName(billingAddress.getLastName()).
+                    selectCountry(billingAddress.getCountry()).
                         sendBillingAddress(billingAddress.getAddressLineOne()).
                             sendBillingCity(billingAddress.getCity()).
-                                sendBillingPostcode(billingAddress.getPostalCode()).
-                                    sendBillingEmail(billingAddress.getEmail());
+                                selectCounty(billingAddress.getCounty()).
+                                    sendBillingPostcode(billingAddress.getPostalCode()).
+                                        sendBillingEmail(billingAddress.getEmail());
 
     }
 

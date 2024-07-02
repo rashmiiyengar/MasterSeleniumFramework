@@ -51,7 +51,7 @@ public class StorePage extends BasePage {
     }
 
     public CartPage clickViewCarkLink(){
-        driver.findElement(viewCartLink).click();
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(viewCartLink)).click();
         return  new CartPage(driver);
     }
 

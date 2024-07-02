@@ -8,6 +8,8 @@ public class BillingAddress {
     private String city;
     private String postalCode;
     private String email;
+    private String country;
+    private String county;
 
     public BillingAddress(String firstName,String lastName,String addressLineOne,String city,String postalCode,String email){
 
@@ -17,6 +19,8 @@ public class BillingAddress {
         this.city = city;
         this.postalCode = postalCode;
         this.email=email;
+        this.country=country;
+        this.county=county;
     }
 
     public BillingAddress(){
@@ -39,6 +43,22 @@ public class BillingAddress {
     public BillingAddress setLastName(String lastName) {
         this.lastName = lastName;
         return this;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getAddressLineOne() {
