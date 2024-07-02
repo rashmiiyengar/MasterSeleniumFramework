@@ -71,8 +71,10 @@ public class MyFirstTestCase extends BaseTest {
         }
 
         Assert.assertEquals(cartpage.getProductName(),product.getName());
-        CheckoutPage checkoutPage = cartpage.clickCheckoutBtn().
-                setBillingAddress(billingAddress);
+        CheckoutPage checkoutPage = cartpage.
+                clickCheckoutBtn().
+                    setBillingAddress(billingAddress).
+                        selectDirectBankTransfer();
         Thread.sleep(2000);
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }

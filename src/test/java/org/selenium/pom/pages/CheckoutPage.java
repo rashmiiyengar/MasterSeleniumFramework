@@ -24,7 +24,9 @@ public class CheckoutPage extends BasePage {
     private final By billingPhone = By.xpath("//input[@id='billing_phone']");
     private final By placeOrder = By.xpath("//button[@id='place_order']");
     private final By countryDropdown = By.id("billing_country");
-    private final By countyDropdown = By.id("select2-billing_state-container");
+    private final By countyDropdown = By.id("billing_state");
+    private final By directBankTransfer= By.id("payment_method_bacs");
+
 
     private final By clickLogin = By.cssSelector(".showlogin");
     private final By loginFirstname = By.xpath("//input[@id=\"username\"]");
@@ -120,11 +122,21 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
+    public CheckoutPage selectDirectBankTransfer(){
+       WebElement e= waitLong.until(ExpectedConditions.elementToBeClickable(directBankTransfer));
+       if(!e.isSelected()){
+           e.click();
+       }
+        return this;
+    }
+
+
     public ConfirmationPage clickPlaceOrder(){
         waitForElementToDisappear(overLay);
         driver.findElement(placeOrder).click();
         return new ConfirmationPage(driver);
     }
+
 
     public CheckoutPage setBillingAddress(BillingAddress billingAddress){
 
