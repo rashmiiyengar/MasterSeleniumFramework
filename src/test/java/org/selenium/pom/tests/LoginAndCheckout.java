@@ -1,6 +1,5 @@
-package org.selenium;
+package org.selenium.pom.tests;
 
-import org.selenium.pom.base.BasePage;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.Product;

@@ -1,7 +1,5 @@
-package org.selenium;
+package org.selenium.pom.tests;
 
-import org.bouncycastle.util.Store;
-import org.openqa.selenium.By;
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.Product;
@@ -11,7 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class MyFirstTestCase extends BaseTest {
 
