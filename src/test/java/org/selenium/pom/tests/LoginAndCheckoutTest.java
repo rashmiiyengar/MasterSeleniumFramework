@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class LoginAndCheckout  extends BaseTest {
+public class LoginAndCheckoutTest extends BaseTest {
 
     @Test
     public void loginWithUserAndCheckout() throws InterruptedException, IOException {
