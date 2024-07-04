@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.selenium.pom.utils.ConfigLoader;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -20,23 +22,20 @@ public BasePage(WebDriver driver){
 }
 
 public void load(String endPoint){
-    driver.get("https://askomdch.com" +endPoint);
+    driver.get(ConfigLoader.getInstanceMethod().getBaseUrl() +endPoint);
 }
 
-
-public void waitForElementToDisappear(By element){
+public void waitForElementToDisappear(By element) {
     List<WebElement> overlays = driver.findElements(element);
     System.out.println(overlays.size());
-    if(overlays.size()>0){
+    if (overlays.size() > 0) {
         waitLong.until(
                 ExpectedConditions.invisibilityOfAllElements(overlays)
         );
         System.out.println("Overlays is invisible");
-    }
-    else{
+    } else {
         System.out.println("Overlay not found");
     }
 }
-
 
 }
