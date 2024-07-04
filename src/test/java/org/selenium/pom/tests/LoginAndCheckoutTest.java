@@ -20,7 +20,7 @@ public class LoginAndCheckoutTest extends BaseTest {
         Product product = new Product(1215);
         User user = new User("SaiRam1","Sairam1");
 
-        HomePage homePage = new HomePage(driver).load();
+        HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");

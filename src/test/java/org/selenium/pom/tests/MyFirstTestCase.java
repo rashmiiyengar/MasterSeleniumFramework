@@ -14,7 +14,7 @@ public class MyFirstTestCase extends BaseTest {
 
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
-        HomePage homePage = new HomePage(driver).load();
+        HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
@@ -51,7 +51,7 @@ public class MyFirstTestCase extends BaseTest {
         BillingAddress billingAddress=JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         Product product = new Product(1215);
 
-        HomePage homePage = new HomePage(driver).load();
+        HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
@@ -75,6 +75,5 @@ public class MyFirstTestCase extends BaseTest {
         Thread.sleep(2000);
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }
-
 }
 
