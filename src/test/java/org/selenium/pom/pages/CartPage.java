@@ -16,7 +16,7 @@ public class CartPage extends BasePage {
 
     // Using page factory
     // For tcs where construction of selector is at run time we cant use page factory
-    //
+
     @FindBy(css = ".product-name a" )
     private WebElement productName;
 
