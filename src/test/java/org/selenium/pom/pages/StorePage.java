@@ -55,4 +55,9 @@ public class StorePage extends BasePage {
         return  new CartPage(driver);
     }
 
+    public StorePage load(){
+        load("/store");
+        return this;
+    }
+
 }
