@@ -18,7 +18,7 @@ public class EndToEndTest extends BaseTest {
 
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         Product product = new Product(1215);
-        User user = new User("SaiRam1","Sairam1");
+        User user = new User("SaiRam1","Sairam1","Sairam1@gmail.com");
 
         HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
