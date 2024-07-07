@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.objects.Product;
 
+import java.io.IOException;
 import java.time.Duration;
 
 public class StorePage extends BasePage {
@@ -39,7 +41,7 @@ public class StorePage extends BasePage {
     public StorePage clickAddtoCartBtn(String productName){
         By addToCartBtn = getAddToCartBtnElement(productName);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn));
           driver.findElement(addToCartBtn).click();
           return this;
     }
@@ -58,6 +60,12 @@ public class StorePage extends BasePage {
     public StorePage load(){
         load("/store");
         return this;
+    }
+
+
+    public ProductPage navigateToTheProductFromStore(Integer id) throws IOException {
+        waitLong.until(ExpectedConditions.elementToBeClickable(By.xpath("//h2[normalize-space()='"+ new Product(id).getName() + "']"))).click();
+        return new ProductPage(driver);
     }
 
 }
