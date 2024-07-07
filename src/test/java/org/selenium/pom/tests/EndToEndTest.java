@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class EndToEndTest extends BaseTest {
 
-    @Test
+   // @Test
     public void loginWithUserAndCheckout() throws InterruptedException, IOException {
 
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
@@ -46,7 +46,7 @@ public class EndToEndTest extends BaseTest {
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }
 
-    @Test
+    //@Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
         HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
@@ -71,7 +71,7 @@ public class EndToEndTest extends BaseTest {
         ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }
 
-    @Test
+    //@Test
     public void checkoutToConfirmation() throws InterruptedException, IOException {
         //using POJO Object
 

@@ -34,6 +34,8 @@ public class CheckoutPage extends BasePage {
     private final By loginBtn = By.cssSelector(".woocommerce-button.button.woocommerce-form-login__submit");
 
     private final By overLay = By.cssSelector(".blockUI.blockOverlay");
+    private final By productNameCheckout = By.xpath("(//td[@class='product-name'])[1]");
+    private final By thankYouNotice = By.cssSelector(".woocommerce-order p");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -112,6 +114,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage login(String username,String password){
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(loginFirstname));
         driver.findElement(loginFirstname).sendKeys(username);
         driver.findElement(loginPassword).sendKeys(password);
         return this;
@@ -137,6 +140,18 @@ public class CheckoutPage extends BasePage {
         return new ConfirmationPage(driver);
     }
 
+    public CheckoutPage load(){
+        load("/checkout");
+        return  this;
+    }
+
+    public String getProductName (){
+      return  waitLong.until(ExpectedConditions.visibilityOfElementLocated(productNameCheckout)).getText();
+    }
+
+    public String getNotice(){
+        return waitLong.until(ExpectedConditions.visibilityOfElementLocated(thankYouNotice)).getText();
+    }
 
     public CheckoutPage setBillingAddress(BillingAddress billingAddress){
 

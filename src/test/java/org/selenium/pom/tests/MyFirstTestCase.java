@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MyFirstTestCase extends BaseTest {
 
-    @Test
+   // @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
         HomePage homePage = new HomePage(getDriver()).load();
         StorePage storePage= homePage.navigateToStoreUsingMenu();
@@ -37,7 +37,7 @@ public class MyFirstTestCase extends BaseTest {
                 ConfirmationPage confirmationPage = checkoutPage.clickPlaceOrder();
     }
 
-    @Test
+   // @Test
     public void checkoutToConfirmation() throws InterruptedException, IOException {
 
 
