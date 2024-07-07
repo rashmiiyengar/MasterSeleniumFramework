@@ -64,7 +64,7 @@ public class SignUpApi {
     public Response register(User user){
         Cookies cookies= new Cookies();
 
-        Header  header = new Header("Content-Type","application/x-www-form-urlencoded");
+        Header  header = new Header("content-type","application/x-www-form-urlencoded");
         Headers headers = new Headers(header);
 
         HashMap<String,String> formParams = new HashMap<>();
@@ -78,7 +78,7 @@ public class SignUpApi {
                 baseUri(ConfigLoader.getInstanceMethod().
                         getBaseUrl()).
                 headers(headers).
-                body(formParams).
+                formParams(formParams).
                 cookies(cookies).
                 log().
                 all(). //to log the request
@@ -95,6 +95,8 @@ public class SignUpApi {
         if(response.getStatusCode()!= 302){
             throw new RuntimeException("Failed to register the account : " +response.getStatusCode());
         }
+
+        this.cookies = response.getDetailedCookies();
         return  response;
     }
 
