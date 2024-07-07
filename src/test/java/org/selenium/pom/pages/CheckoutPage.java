@@ -36,6 +36,7 @@ public class CheckoutPage extends BasePage {
     private final By overLay = By.cssSelector(".blockUI.blockOverlay");
     private final By productNameCheckout = By.xpath("(//td[@class='product-name'])[1]");
     private final By thankYouNotice = By.cssSelector(".woocommerce-order p");
+    private final By cashOnDelivaryRadioBtn = By.id("payment_method_cod");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -164,6 +165,12 @@ public class CheckoutPage extends BasePage {
                                     sendBillingPostcode(billingAddress.getPostalCode()).
                                         sendBillingEmail(billingAddress.getEmail());
 
+    }
+
+    public CheckoutPage selectCashOnDeliveryMethod(){
+        waitForElementToDisappear(overLay);
+        waitLong.until(ExpectedConditions.elementToBeClickable(cashOnDelivaryRadioBtn)).click();
+        return  this;
     }
 
 }

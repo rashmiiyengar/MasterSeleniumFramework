@@ -63,4 +63,16 @@ public class CheckoutTest extends BaseTest {
 
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
     }
+
+    @Test
+    public void GuestCheckoutUsingCashOnDelivary() throws IOException {
+        BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
+        CartApi cartApi = new CartApi();
+        cartApi.addToCart(1215,1);
+        injectCookiesToBrowser(cartApi.getCookies());
+        checkoutPage.load().setBillingAddress(billingAddress).selectCashOnDeliveryMethod().clickPlaceOrder();
+        Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
+
+    }
 }
