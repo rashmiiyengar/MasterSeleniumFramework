@@ -23,8 +23,9 @@ public class BillingAddress {
         this.city = city;
         this.postalCode = postalCode;
         this.email=email;
-        this.country=country;
-        this.county=county;
+        this.country= country;
+        this.county= county;
+        this.company = company;
 
     }
 

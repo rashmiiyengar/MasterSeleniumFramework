@@ -4,7 +4,11 @@ import io.restassured.http.Cookies;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.selenium.pom.constants.Codes;
+import org.selenium.pom.constants.EndPoint;
 import org.selenium.pom.objects.BillingAddress;
 
 import java.util.HashMap;
@@ -33,9 +37,42 @@ public class BillingApi {
         formParams.put("billing_postcode",billingAddress.getPostalCode());
         formParams.put("billing_company",billingAddress.getCompany());
         formParams.put("billing_phone",billingAddress.getPhone());
+        formParams.put("woocommerce-edit-address-nonce",fetchEditBillingAddressNonceValueUsingJsoup());
+        formParams.put("action","edit_adddress");
+        formParams.put("save_address","Save address");
+        formParams.put("billing_email",billingAddress.getEmail());
+
+        Response response = ApiRequest.post(EndPoint.ACCOUNT_EDIT_BILLING_ADDRESS.url, headers,formParams,cookies);
+
+        if(response.getStatusCode() != 302){
+            throw  new RuntimeException("Failed to edit the address of the account - " +response.getStatusCode());
+        }
+
+        this.cookies = response.getDetailedCookies();
+        return  response;
     }
 
 
+    private String fetchEditBillingAddressNonceValueUsingJsoup(){
+
+        Response response = getBillingAddress();
+        Document document = Jsoup.parse(response.body().prettyPrint());
+        Element element = document.selectFirst("##woocommerce-edit-address-nonce");
+        assert  element != null;
+        return element.attr("value");
+
+    }
+
+
+
+    private Response getBillingAddress(){
+      Response response=  ApiRequest.get(EndPoint.ACCOUNT_EDIT_BILLING_ADDRESS.url,cookies);
+      if(response.getStatusCode()!= 200){
+          throw new RuntimeException(" Failed to fetch account, HTTP Status Code - " +response.getStatusCode());
+
+      }
+      return  response;
+    }
 
 
 }
