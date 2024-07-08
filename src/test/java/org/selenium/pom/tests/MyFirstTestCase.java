@@ -15,12 +15,12 @@ public class MyFirstTestCase extends BaseTest {
    // @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException {
         HomePage homePage = new HomePage(getDriver()).load();
-        StorePage storePage= homePage.navigateToStoreUsingMenu();
+        StorePage storePage= homePage.getHeaderComponent().navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
-        storePage.clickAddtoCartBtn("Blue Shoes");
+        storePage.getProductThumbnail().clickAddToCartButton("Blue Shoes");
 
-        CartPage cartpage = storePage.clickViewCarkLink();
+        CartPage cartpage = storePage.getProductThumbnail().clickViewCarkLink();
 
         Assert.assertEquals(cartpage.getProductName(),"Blue Shoes");
         CheckoutPage checkoutPage = cartpage.clickCheckoutBtn();
@@ -45,14 +45,14 @@ public class MyFirstTestCase extends BaseTest {
         Product product = new Product(1215);
 
         HomePage homePage = new HomePage(getDriver()).load();
-        StorePage storePage= homePage.navigateToStoreUsingMenu();
+        StorePage storePage= homePage.getHeaderComponent().navigateToStoreUsingMenu();
         storePage.search("Blue");
         Assert.assertEquals(storePage.getTitle(),"Search results: “Blue”");
         Thread.sleep(2000);
         //storePage.clickAddtoCartBtn("Blue Shoes");
-        storePage.clickAddtoCartBtn(product.getName());
+        storePage.getProductThumbnail().clickAddToCartButton(product.getName());
         Thread.sleep(5000);
-        CartPage cartpage = storePage.clickViewCarkLink();
+        CartPage cartpage = storePage.getProductThumbnail().clickViewCarkLink();
 
         try {
             Thread.sleep(2000);

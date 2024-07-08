@@ -7,12 +7,9 @@ import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.ProductPage;
 import org.selenium.pom.pages.StorePage;
-import org.selenium.pom.utils.JacksonUtil;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.io.IOException;
-import java.util.Locale;
 
 public class AddToCartTest extends BaseTest {
 
@@ -21,8 +18,8 @@ public class AddToCartTest extends BaseTest {
         Product product = new Product(1215);
 
         CartPage cartpage = new StorePage(getDriver()).
-                load().
-                clickAddtoCartBtn("Blue Shoes").
+                load().getProductThumbnail().
+                clickAddToCartButton(product.getName()).
                 clickViewCarkLink();
 
         Assert.assertEquals(cartpage.getProductName(),product.getName());
@@ -34,8 +31,8 @@ public class AddToCartTest extends BaseTest {
         Product product = new Product(1215);
 
        new HomePage(getDriver()).
-                load().
-                clickAddToCartButtonFromHomePage(product.getName());
+                load().getProductThumbnail().clickAddToCartButton(product.getName()).clickViewCarkLink();
+
 
     }
 
@@ -51,7 +48,10 @@ public class AddToCartTest extends BaseTest {
 
     @Test(dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class)
     public  void addToCartFeaturedProducts(Product product){
-        CartPage cartpage = new HomePage(getDriver()).load().clickAddToCartButtonFromHomePage(product.getName()).clickViewCarkLink();
+        CartPage cartpage = new HomePage(getDriver()).load().
+                getProductThumbnail().
+                clickAddToCartButton(product.getName()).
+                clickViewCarkLink();
 
         Assert.assertEquals(cartpage.getProductName(),product.getName());
 

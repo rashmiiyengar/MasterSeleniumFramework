@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.Product;
+import org.selenium.pom.pages.components.ProductThumbnail;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -14,10 +15,16 @@ public class StorePage extends BasePage {
     private final By searchFeild = By.xpath("//input[@id='woocommerce-product-search-field-0']");
     private final By searchBtn= By.xpath("//button[@type='submit' and @value='Search']");
     private final By title =By.xpath("//h1[@class='woocommerce-products-header__title page-title']");
-    private final By viewCartLink = By.cssSelector(".added_to_cart.wc-forward");
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
+
+    private ProductThumbnail productThumbnail;
 
     public StorePage(WebDriver driver) {
         super(driver);
+        new ProductThumbnail(driver);
     }
 
     public StorePage enterTextInSearchField(String txt){
@@ -34,17 +41,7 @@ public class StorePage extends BasePage {
       return  driver.findElement(title).getText();
     }
 
-    private By getAddToCartBtnElement(String productName){
-        return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
-    }
 
-    public StorePage clickAddtoCartBtn(String productName){
-        By addToCartBtn = getAddToCartBtnElement(productName);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn));
-          driver.findElement(addToCartBtn).click();
-          return this;
-    }
 
     public StorePage search(String txt){
         driver.findElement(searchFeild).sendKeys(txt);
@@ -52,10 +49,7 @@ public class StorePage extends BasePage {
         return this;
     }
 
-    public CartPage clickViewCarkLink(){
-        waitLong.until(ExpectedConditions.visibilityOfElementLocated(viewCartLink)).click();
-        return  new CartPage(driver);
-    }
+
 
     public StorePage load(){
         load("/store");
