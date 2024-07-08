@@ -69,10 +69,36 @@ public class CheckoutTest extends BaseTest {
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
         CartApi cartApi = new CartApi();
-        cartApi.addToCart(1215,1);
+        cartApi.addToCart(1209,2);
         injectCookiesToBrowser(cartApi.getCookies());
         checkoutPage.load().setBillingAddress(billingAddress).selectCashOnDeliveryMethod().clickPlaceOrder();
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
 
+    }
+
+    @Test
+    public void LoginAndCheckoutUsingCashOnDelivary() throws IOException {
+        BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
+        SignUpApi signUpApi = new SignUpApi();
+        String userName = "demoUser" + new FakerUtils().generateRandomName();
+
+        User user = new User().
+                setUsername(userName).
+                setPassword(userName).
+                setEmail(userName + "@gmail.com");
+
+        signUpApi.register(user);
+        CartApi cartApi = new CartApi(signUpApi.getCookies());
+        Product product = new Product(1215);
+        cartApi.addToCart(product.getId(), 1);
+
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
+        injectCookiesToBrowser(signUpApi.getCookies());
+        checkoutPage.load();
+
+        checkoutPage.setBillingAddress(billingAddress).
+                selectCashOnDeliveryMethod().
+                clickPlaceOrder();
+        Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");
     }
 }
