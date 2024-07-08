@@ -1,11 +1,11 @@
 {
   "firstName": "Sairam",
   "lastName": "1",
-  "country": "United States (US)",
+  "country": "India",
   "addressLineOne": "Pune",
   "city": "Pune",
-  "county": "Alaska",
-  "postalCode": "99501",
+  "state": "Maharashtra",
+  "postalCode": "411001",
   "email": "sairam@gmail.com",
   "company": "Test Tech",
   "phone": "1234567890"

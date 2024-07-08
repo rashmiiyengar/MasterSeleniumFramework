@@ -23,7 +23,6 @@ public class BillingApi {
 
     public Response addBillingAddress(BillingAddress billingAddress){
 
-
         Header header = new Header("content-type","application/x-www-form-urlencoded");
         Headers headers = new Headers(header);
 
@@ -33,12 +32,12 @@ public class BillingApi {
         formParams.put("billing_country", Codes.getCountryCode(billingAddress.getCountry()));
         formParams.put("billing_address_1", billingAddress.getAddressLineOne());
         formParams.put("billing_city",billingAddress.getCity());
-        formParams.put("billing_state",Codes.getStateCode(billingAddress.getCounty()));
+        formParams.put("billing_state",Codes.getStateCode(billingAddress.getState()));
         formParams.put("billing_postcode",billingAddress.getPostalCode());
         formParams.put("billing_company",billingAddress.getCompany());
         formParams.put("billing_phone",billingAddress.getPhone());
         formParams.put("woocommerce-edit-address-nonce",fetchEditBillingAddressNonceValueUsingJsoup());
-        formParams.put("action","edit_adddress");
+        formParams.put("action","edit_address");
         formParams.put("save_address","Save address");
         formParams.put("billing_email",billingAddress.getEmail());
 
@@ -67,8 +66,6 @@ public class BillingApi {
 
     }
 
-
-
     private Response getBillingAddress(){
       Response response=  ApiRequest.get(EndPoint.ACCOUNT_EDIT_BILLING_ADDRESS.url,cookies);
       if(response.getStatusCode()!= 200){
@@ -77,6 +74,5 @@ public class BillingApi {
       }
       return  response;
     }
-
 
 }

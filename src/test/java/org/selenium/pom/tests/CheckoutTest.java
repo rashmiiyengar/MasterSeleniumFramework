@@ -111,20 +111,25 @@ public class CheckoutTest extends BaseTest {
 
         SignUpApi signUpApi = new SignUpApi();
         signUpApi.register(user);
+        System.out.println("User registered. Cookies: " + signUpApi.getCookies());
 
         BillingApi billingApi = new BillingApi(signUpApi.getCookies());
         billingApi.addBillingAddress(billingAddress);
+        System.out.println("Billing address added.");
 
         CartApi cartApi = new CartApi(signUpApi.getCookies());
         Product product = new Product(1215);
         cartApi.addToCart(product.getId(),1);
+        System.out.println("Product added to cart.");
 
         CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
         injectCookiesToBrowser(signUpApi.getCookies());
         checkoutPage.load();
         checkoutPage.selectDirectBankTransfer().clickPlaceOrder();
 
-        Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
+        String notice = checkoutPage.getNotice();
+        System.out.println("Checkout notice: " + notice);
+        Assert.assertEquals(notice,"Thank you. Your order has been received.");
 
     }
 

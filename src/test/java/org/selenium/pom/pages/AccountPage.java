@@ -7,12 +7,10 @@ import org.selenium.pom.base.BasePage;
 
 public class AccountPage extends BasePage {
 
-
     private final By usernameFld = By.cssSelector("username");
     private final By passwordFld = By.cssSelector("password");
     private final By loginBtn =  By.cssSelector("button[value='Log in']");
     private final By errorMessage = By.xpath("//ul[@class='woocommerce-error']/child::li");
-
 
     public AccountPage(WebDriver driver) {
         super(driver);
@@ -29,6 +27,7 @@ public class AccountPage extends BasePage {
         driver.findElement(loginBtn).click();
         return this;
     }
+
     public String getErrorTxt(){
         return driver.findElement(errorMessage).getText();
     }

@@ -161,7 +161,7 @@ public class CheckoutPage extends BasePage {
                     selectCountry(billingAddress.getCountry()).
                         sendBillingAddress(billingAddress.getAddressLineOne()).
                             sendBillingCity(billingAddress.getCity()).
-                                selectCounty(billingAddress.getCounty()).
+                                selectCounty(billingAddress.getState()).
                                     sendBillingPostcode(billingAddress.getPostalCode()).
                                         sendBillingEmail(billingAddress.getEmail());
 

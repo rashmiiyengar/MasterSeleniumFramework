@@ -9,13 +9,13 @@ public class BillingAddress {
     private String postalCode;
     private String email;
     private String country;
-    private String county;
+    private String state;
 
     private String company;
 
     private String phone;
 
-    public BillingAddress(String firstName,String lastName,String addressLineOne,String city,String postalCode,String email){
+    public BillingAddress(String firstName,String lastName,String addressLineOne,String city,String postalCode,String email,String country,String state,String company){
 
         this.firstName=firstName;
         this.lastName=lastName;
@@ -24,7 +24,7 @@ public class BillingAddress {
         this.postalCode = postalCode;
         this.email=email;
         this.country= country;
-        this.county= county;
+        this.state= state;
         this.company = company;
 
     }
@@ -66,12 +66,12 @@ public class BillingAddress {
         return this;
     }
 
-    public String getCounty() {
-        return county;
+    public String getState() {
+        return state;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getCountry() {

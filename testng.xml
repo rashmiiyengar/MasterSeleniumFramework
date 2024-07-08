@@ -22,5 +22,6 @@
        <packages>
            <package name="org.selenium.pom.tests"></package>
        </packages>
+
     </test>
 </suite>
