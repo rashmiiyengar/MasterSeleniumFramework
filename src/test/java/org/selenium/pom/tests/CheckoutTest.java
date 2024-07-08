@@ -1,5 +1,6 @@
 package org.selenium.pom.tests;
 
+import org.selenium.pom.api.actions.BillingApi;
 import org.selenium.pom.api.actions.CartApi;
 import org.selenium.pom.api.actions.SignUpApi;
 import org.selenium.pom.base.BaseTest;
@@ -101,6 +102,32 @@ public class CheckoutTest extends BaseTest {
                 clickPlaceOrder();
         Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");
     }
+
+    @Test
+    public void CheckoutWithAnAccountHavingBillingAddress() throws IOException {
+        BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
+        String userName = "demoUser" + new FakerUtils().generateRandomName();
+        User user = new User().setUsername(userName).setPassword(userName).setEmail(userName + "@gmail.com");
+
+        SignUpApi signUpApi = new SignUpApi();
+        signUpApi.register(user);
+
+        BillingApi billingApi = new BillingApi(signUpApi.getCookies());
+        billingApi.addBillingAddress(billingAddress);
+
+        CartApi cartApi = new CartApi(signUpApi.getCookies());
+        Product product = new Product(1215);
+        cartApi.addToCart(product.getId(),1);
+
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
+        injectCookiesToBrowser(signUpApi.getCookies());
+        checkoutPage.load();
+        checkoutPage.selectDirectBankTransfer().clickPlaceOrder();
+
+        Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
+
+    }
+
 
 
 

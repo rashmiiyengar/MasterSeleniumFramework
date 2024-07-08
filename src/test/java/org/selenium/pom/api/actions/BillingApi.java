@@ -42,6 +42,10 @@ public class BillingApi {
         formParams.put("save_address","Save address");
         formParams.put("billing_email",billingAddress.getEmail());
 
+        System.out.println("Sending request to edit billing address:");
+        System.out.println("Headers: " + headers);
+        System.out.println("Form Params: " + formParams);
+
         Response response = ApiRequest.post(EndPoint.ACCOUNT_EDIT_BILLING_ADDRESS.url, headers,formParams,cookies);
 
         if(response.getStatusCode() != 302){
@@ -57,7 +61,7 @@ public class BillingApi {
 
         Response response = getBillingAddress();
         Document document = Jsoup.parse(response.body().prettyPrint());
-        Element element = document.selectFirst("##woocommerce-edit-address-nonce");
+        Element element = document.selectFirst("#woocommerce-edit-address-nonce");
         assert  element != null;
         return element.attr("value");
 
