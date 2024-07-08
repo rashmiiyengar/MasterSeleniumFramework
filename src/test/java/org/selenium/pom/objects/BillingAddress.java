@@ -11,6 +11,10 @@ public class BillingAddress {
     private String country;
     private String county;
 
+    private String company;
+
+    private String phone;
+
     public BillingAddress(String firstName,String lastName,String addressLineOne,String city,String postalCode,String email){
 
         this.firstName=firstName;
@@ -21,10 +25,26 @@ public class BillingAddress {
         this.email=email;
         this.country=country;
         this.county=county;
+
     }
 
     public BillingAddress(){
 
+    }
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getFirstName() {
