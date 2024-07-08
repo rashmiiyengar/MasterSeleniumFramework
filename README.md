@@ -1,4 +1,4 @@
-MasterSeleniumFramework
+**MasterSeleniumFramework**
 
 With further updates - This project is designed and developed with the help of -
 
