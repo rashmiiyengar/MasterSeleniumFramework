@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class HomePage extends BasePage {
   private final By storeMenuLink = By.xpath("//li[@id='menu-item-1227']");
-
+  private final By viewCartLink = By.cssSelector(".added_to_cart.wc-forward");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -32,7 +32,6 @@ public class HomePage extends BasePage {
         return this;
     }
 
-
     private By getAddToCartBtnElement(String productName){
         return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
     }
@@ -44,6 +43,10 @@ public class HomePage extends BasePage {
         return  this;
     }
 
+    public CartPage clickViewCarkLink(){
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(viewCartLink)).click();
+        return  new CartPage(driver);
+    }
 
 //    public void clickStoreMenuLink(){
 //        driver.findElement(storeMenuLink).click();
