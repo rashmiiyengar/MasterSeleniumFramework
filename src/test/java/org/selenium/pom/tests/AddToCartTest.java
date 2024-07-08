@@ -1,6 +1,7 @@
 package org.selenium.pom.tests;
 
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.dataproviders.MyDataProvider;
 import org.selenium.pom.objects.Product;
 import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.HomePage;
@@ -48,7 +49,7 @@ public class AddToCartTest extends BaseTest {
 
     }
 
-    @Test(dataProvider = "getFeaturedProducts")
+    @Test(dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class)
     public  void addToCartFeaturedProducts(Product product){
         CartPage cartpage = new HomePage(getDriver()).load().clickAddToCartButtonFromHomePage(product.getName()).clickViewCarkLink();
 
@@ -56,10 +57,5 @@ public class AddToCartTest extends BaseTest {
 
     }
 
-    @DataProvider(name = "getFeaturedProducts",parallel = true)
-    public Product[]  getFeaturedProducts() throws IOException {
 
-        return JacksonUtil.deserializeJson("products.json",Product[].class);
-
-    }
 }
