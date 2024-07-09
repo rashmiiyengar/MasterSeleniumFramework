@@ -27,8 +27,8 @@ public class BaseTest {
 
         return  this.driver.get();
     }
-    @Parameters("browser")
 
+    @Parameters("browser")
     @BeforeMethod
     public synchronized void startDriver(String browser){
       // setDriver(new DriverManagerOriginal().initializeDriver(browser));
