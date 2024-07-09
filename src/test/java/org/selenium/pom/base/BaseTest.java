@@ -3,7 +3,10 @@ package org.selenium.pom.base;
 import io.restassured.http.Cookies;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.selenium.pom.constants.DriverType;
 import org.selenium.pom.factory.DriverManager;
+import org.selenium.pom.factory.DriverManagerFactory;
+import org.selenium.pom.factory.DriverManagerOriginal;
 import org.selenium.pom.utils.CookieUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,25 +18,31 @@ public class BaseTest {
     private ThreadLocal<WebDriver>  driver= new ThreadLocal<>();
 
     public void setDriver(WebDriver driver){
-      this.driver.set(driver);
+
+        this.driver.set(driver);
+
     }
 
     protected WebDriver getDriver(){
+
         return  this.driver.get();
     }
     @Parameters("browser")
 
     @BeforeMethod
-    public void startDriver(String browser){
-       setDriver(new DriverManager().initializeDriver(browser));
-       System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +driver);
+    public synchronized void startDriver(String browser){
+      // setDriver(new DriverManagerOriginal().initializeDriver(browser));
+
+        setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
+        System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +driver);
     }
 
     @AfterMethod
-    public void quitDriver(){
-    getDriver().quit();
-    }
+    public synchronized void quitDriver(){
 
+        getDriver().quit();
+
+    }
 
     public void injectCookiesToBrowser(Cookies cookies){
         List<Cookie> cookiesList = new CookieUtils().convertRestAssuredCookiesToSeleniumCookies(cookies);

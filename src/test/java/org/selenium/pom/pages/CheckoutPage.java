@@ -123,6 +123,7 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage clickLoginButton(){
         waitLong.until(ExpectedConditions.visibilityOfElementLocated(loginBtn)).click();
+        waitForLoginBtnToDisappear();
         return this;
     }
 
@@ -152,6 +153,11 @@ public class CheckoutPage extends BasePage {
 
     public String getNotice(){
         return waitLong.until(ExpectedConditions.visibilityOfElementLocated(thankYouNotice)).getText();
+    }
+
+    private CheckoutPage waitForLoginBtnToDisappear(){
+        waitLong.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        return this;
     }
 
     public CheckoutPage setBillingAddress(BillingAddress billingAddress){

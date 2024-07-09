@@ -17,7 +17,7 @@ protected WebDriverWait waitShort;
 
 public BasePage(WebDriver driver){
     this.driver=driver;
-    waitLong = new WebDriverWait(driver,Duration.ofSeconds(15));
+    waitLong = new WebDriverWait(driver,Duration.ofSeconds(30));
     waitShort = new WebDriverWait(driver,Duration.ofSeconds(5));
 }
 
