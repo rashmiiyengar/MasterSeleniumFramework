@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.extentreports.ExtentReport;
 
 public class CartPage extends BasePage {
 
@@ -35,6 +36,7 @@ public class CartPage extends BasePage {
 
     public CheckoutPage clickCheckoutBtn(){
         waitLong.until(ExpectedConditions.elementToBeClickable(checkoutButton)).click();
+        ExtentReport.test.pass("Checkout button clicked");
        //driver.findElement(checkoutButon).click();
        return new CheckoutPage(driver);
     }

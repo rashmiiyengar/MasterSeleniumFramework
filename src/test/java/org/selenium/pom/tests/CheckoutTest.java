@@ -4,6 +4,7 @@ import org.selenium.pom.api.actions.BillingApi;
 import org.selenium.pom.api.actions.CartApi;
 import org.selenium.pom.api.actions.SignUpApi;
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.extentreports.ExtentReport;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.Product;
 import org.selenium.pom.objects.User;
@@ -35,6 +36,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void LoginAndCheckoutUsingDirectBankTransfer() throws IOException {
+        ExtentReport.createTest("GuestCheckoutUsingCashOnDelivary");
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         SignUpApi signUpApi = new SignUpApi();
         String userName = "demoUser" + new FakerUtils().generateRandomName();
@@ -67,6 +69,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void GuestCheckoutUsingCashOnDelivary() throws IOException {
+        ExtentReport.createTest("GuestCheckoutUsingCashOnDelivary");
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
         CartApi cartApi = new CartApi();
@@ -79,6 +82,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test
     public void LoginAndCheckoutUsingCashOnDelivary() throws IOException {
+        ExtentReport.createTest("LoginAndCheckoutUsingCashOnDelivary");
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);
         SignUpApi signUpApi = new SignUpApi();
         String userName = "demoUser" + new FakerUtils().generateRandomName();
