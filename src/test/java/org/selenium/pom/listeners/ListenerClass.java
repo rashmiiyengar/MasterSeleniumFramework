@@ -7,6 +7,7 @@ import org.selenium.pom.utils.PropertyUtils;
 import org.testng.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ListenerClass implements ITestListener , ISuiteListener {
 
@@ -19,13 +20,16 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     public void onTestSuccess(ITestResult result) {
         // Code to execute when a test passes
         ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed. ");
+        ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed",true);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         // Code to execute when a test fails
-        ExtentLogger.fail(result.getMethod().getMethodName()+ "is failed");
         //attach screenshot when failed
+        ExtentLogger.fail(result.getMethod().getMethodName()+ "is failed",true);
+        ExtentLogger.fail(result.getThrowable().toString());
+        ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
     }
 
     @Override

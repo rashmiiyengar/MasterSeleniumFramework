@@ -1,32 +1,27 @@
 package org.selenium.pom.base;
 
 import io.restassured.http.Cookies;
-import io.restassured.http.Method;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.selenium.pom.constants.DriverType;
-import org.selenium.pom.extentreports.ExtentReport;
 import org.selenium.pom.factory.DriverManager;
 import org.selenium.pom.factory.DriverManagerFactory;
-import org.selenium.pom.factory.DriverManagerOriginal;
 import org.selenium.pom.utils.CookieUtils;
 import org.testng.annotations.*;
 
-import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.List;
 
 public class BaseTest {
     private ThreadLocal<WebDriver>  driver= new ThreadLocal<>();
 
-    public void setDriver(WebDriver driver){
-        this.driver.set(driver);
+    protected WebDriver getDriver() {
+        return DriverManager.getDriver();
     }
 
-    protected WebDriver getDriver(){
-        return  this.driver.get();
+    private void setDriver(WebDriver driver) {
+        // this.driver.set(driver);
+        DriverManager.setDriver(driver);
     }
-
 
     @Parameters("browser")
     @BeforeMethod

@@ -1,9 +1,6 @@
 package org.selenium.pom.extentreports;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
-import org.openqa.selenium.TakesScreenshot;
-import org.selenium.pom.factory.DriverManager;
-import org.selenium.pom.factory.DriverManagerFactory;
 import org.selenium.pom.utils.ConfigLoader;
 import org.selenium.pom.utils.ScreenshotUtils;
 
@@ -26,6 +23,7 @@ public final class ExtentLogger {
     public static void skip(String message){
         ExtentManager.getExtentTest().skip(message);
     }
+
     public static void pass(String message, boolean isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getPassedStepsScreenshot().equalsIgnoreCase(YES)
                 && isScreeshotNeeded) {

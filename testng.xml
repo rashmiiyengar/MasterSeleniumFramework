@@ -22,12 +22,12 @@
         <!--            <package name="org.selenium.pom.tests"/>-->
         <!--        </packages>-->
         <parameter name="browser" value="FIREFOX"/>
-<!--       <packages>-->
-<!--           <package name="org.selenium.pom.tests.AddToCartTest"></package>-->
-<!--       </packages>-->
+       <packages>
+           <package name="org.selenium.pom.tests"></package>
+       </packages>
 
-        <classes>
-            <class name="org.selenium.pom.tests.NavigationTest"></class>
-        </classes>
+<!--        <classes>-->
+<!--            <class name="org.selenium.pom.tests.AddToCartTest"></class>-->
+<!--        </classes>-->
     </test>
 </suite>
