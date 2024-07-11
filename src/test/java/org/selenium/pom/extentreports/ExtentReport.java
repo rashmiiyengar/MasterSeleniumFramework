@@ -25,6 +25,8 @@ public final class ExtentReport {
             spark.config().setTheme(Theme.STANDARD);
             spark.config().setDocumentTitle("Test Results");
             spark.config().setReportName("Master Selenium Framework Report");
+
+            extentReport.setSystemInfo("Employee","Rashmi Soundar");
         }
     }
 
