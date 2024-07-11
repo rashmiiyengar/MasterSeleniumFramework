@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.extentreports.ExtentLogger;
 
 public class ProductPage extends BasePage {
 
@@ -31,6 +32,7 @@ public class ProductPage extends BasePage {
     public ProductPage addToCartFromProduct(){
         waitLong.until(ExpectedConditions.visibilityOfElementLocated(addToCartBtn));
         driver.findElement(addToCartBtn).click();
+        ExtentLogger.pass("Added to cart " ,true);
         return  this;
 
     }

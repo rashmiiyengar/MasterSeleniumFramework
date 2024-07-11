@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import static org.selenium.pom.constants.FrameworkConstants.ICON_SOCIAL_GITHUB;
+import static org.selenium.pom.constants.FrameworkConstants.ICON_SOCIAL_LINKEDIN;
+
 public final class ExtentReport {
 
     private ExtentReport(){}
@@ -27,6 +30,9 @@ public final class ExtentReport {
             spark.config().setReportName("Master Selenium Framework Report");
 
             extentReport.setSystemInfo("Employee","Rashmi Soundar");
+            extentReport.setSystemInfo("Skill", "Test Automation Engineer");
+            extentReport.setSystemInfo("Employee",
+                    "<b> Rashmi Soundar </b>" + " " + ICON_SOCIAL_LINKEDIN + " " + ICON_SOCIAL_GITHUB);
         }
     }
 
@@ -34,7 +40,7 @@ public final class ExtentReport {
 
         if(Objects.nonNull(extentReport)){
             extentReport.flush();
-            Desktop.getDesktop().browse(new File("index.html").toURI());
+            Desktop.getDesktop().browse(new File(FrameworkConstants.getExtentreportpath()).toURI());
         }
     }
 
