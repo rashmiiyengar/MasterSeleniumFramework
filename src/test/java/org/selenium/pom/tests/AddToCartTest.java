@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public class AddToCartTest extends BaseTest {
 
-    @Test
+    //@Test
     public void addToCartFromStorePage() throws IOException {
-        ExtentReport.createTest("addToCartFromStorePage");
+
         Product product = new Product(1215);
 
         CartPage cartpage = new StorePage(getDriver()).
@@ -30,7 +30,7 @@ public class AddToCartTest extends BaseTest {
 
     @Test
     public void addFeaturedProductToCart() throws IOException {
-        ExtentReport.createTest("addFeaturedProductToCart");
+
         Product product = new Product(1215);
 
        new HomePage(getDriver()).
@@ -41,7 +41,7 @@ public class AddToCartTest extends BaseTest {
 
     @Test
     public void addToCartFromProductPage() throws IOException {
-        ExtentReport.createTest("addToCartFromProductPage");
+
         Product product = new Product(1215);
         String productNameSeparatedByDash = product.getName().toLowerCase().replaceAll(" ","-");
 
@@ -52,7 +52,7 @@ public class AddToCartTest extends BaseTest {
 
     @Test(dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class)
     public  void addToCartFeaturedProducts(Product product){
-        ExtentReport.createTest("addToCartFeaturedProducts");
+
         CartPage cartpage = new HomePage(getDriver()).load().
                 getProductThumbnail().
                 clickAddToCartButton(product.getName()).

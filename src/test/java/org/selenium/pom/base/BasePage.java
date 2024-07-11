@@ -21,11 +21,12 @@ public BasePage(WebDriver driver){
     waitShort = new WebDriverWait(driver,Duration.ofSeconds(5));
 }
 
-public void load(String endPoint){
+protected void load(String endPoint){
     driver.get(ConfigLoader.getInstanceMethod().getBaseUrl() +endPoint);
 }
 
-public void waitForElementToDisappear(By element) {
+
+protected void waitForElementToDisappear(By element) {
     List<WebElement> overlays = driver.findElements(element);
     System.out.println(overlays.size());
     if (overlays.size() > 0) {

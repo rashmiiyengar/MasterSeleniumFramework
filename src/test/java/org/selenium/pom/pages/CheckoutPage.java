@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.extentreports.ExtentLogger;
 import org.selenium.pom.objects.BillingAddress;
 
 import java.time.Duration;
@@ -118,12 +119,14 @@ public class CheckoutPage extends BasePage {
         waitLong.until(ExpectedConditions.visibilityOfElementLocated(loginFirstname));
         driver.findElement(loginFirstname).sendKeys(username);
         driver.findElement(loginPassword).sendKeys(password);
+
         return this;
     }
 
     public CheckoutPage clickLoginButton(){
         waitLong.until(ExpectedConditions.visibilityOfElementLocated(loginBtn)).click();
         waitForLoginBtnToDisappear();
+        ExtentLogger.pass("Login successfull");
         return this;
     }
 

@@ -1,6 +1,7 @@
 package org.selenium.pom.base;
 
 import io.restassured.http.Cookies;
+import io.restassured.http.Method;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.selenium.pom.constants.DriverType;
@@ -12,6 +13,7 @@ import org.selenium.pom.utils.CookieUtils;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.util.List;
 
 public class BaseTest {
@@ -25,23 +27,14 @@ public class BaseTest {
         return  this.driver.get();
     }
 
-    @BeforeSuite
-    public void beforeSuiteMethod(){
-        ExtentReport.initReports();
-    }
-
-    @AfterSuite
-    public void afterSuiteMethod() throws IOException {
-        ExtentReport.flushReports();
-    }
 
     @Parameters("browser")
     @BeforeMethod
     public synchronized void startDriver(String browser){
       // setDriver(new DriverManagerOriginal().initializeDriver(browser));
-
         setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
         System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +driver);
+
     }
 
     @AfterMethod
