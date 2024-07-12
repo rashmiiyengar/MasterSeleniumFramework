@@ -7,6 +7,7 @@ public final class FrameworkConstants {
 
     private FrameworkConstants(){}
 
+    private static final String EXCEL_PATH = System.getProperty("user.dir")+"/src/test/resources/excel/testdataupdated.xlsx";
     public static final String ICON_SOCIAL_LINKEDIN_URL = "https://www.linkedin.com/in/rashmi-soundar-22a62276/";
     public static final String ICON_SOCIAL_GITHUB_URL = "https://github.com/rashmiiyengar";
     public static final String ICON_SOCIAL_LINKEDIN = "<a href='" + ICON_SOCIAL_LINKEDIN_URL
@@ -34,4 +35,10 @@ public final class FrameworkConstants {
             return EXTENTREPORTPATH+"/AutomationReport.html";
         }
     }
+
+    public static String getExcelPath() {
+        return EXCEL_PATH;
+    }
+
+
 }

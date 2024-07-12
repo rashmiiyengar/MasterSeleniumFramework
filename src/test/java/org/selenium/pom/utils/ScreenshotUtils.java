@@ -10,12 +10,10 @@ public final class ScreenshotUtils {
 
     }
 
-
     //Updated screenshot utils
     public static String getBase64Image(){
 
         return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
-
 
     }
 }
