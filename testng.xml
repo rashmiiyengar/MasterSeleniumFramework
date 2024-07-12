@@ -16,6 +16,7 @@
 <!--    </test>-->
     <listeners>
         <listener class-name="org.selenium.pom.listeners.ListenerClass"></listener>
+
     </listeners>
     <test name="Regression" parallel="methods" thread-count="6">
         <!--        <packages>-->

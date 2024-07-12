@@ -9,6 +9,8 @@ import org.testng.*;
 import java.io.IOException;
 import java.util.Arrays;
 
+import static org.selenium.pom.constants.FrameworkConstants.*;
+
 public class ListenerClass implements ITestListener , ISuiteListener {
 
     public void onTestStart(ITestResult result) {
@@ -20,14 +22,14 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     public void onTestSuccess(ITestResult result) {
         // Code to execute when a test passes
         ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed. ");
-        ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed",true);
+        ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed. </b>" + " "+ICON_SMILEY_PASS,true);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         // Code to execute when a test fails
         //attach screenshot when failed
-        ExtentLogger.fail(result.getMethod().getMethodName()+ "is failed",true);
+        ExtentLogger.fail(result.getMethod().getMethodName()+ "is failed. </b>"+" "+ICON_SMILEY_FAIL,true);
         ExtentLogger.fail(result.getThrowable().toString());
         ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
     }
@@ -35,7 +37,7 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     @Override
     public void onTestSkipped(ITestResult result) {
         // Code to execute when a test is skipped
-        ExtentLogger.skip(result.getMethod().getMethodName()+ "is skipped. ");
+        ExtentLogger.skip(result.getMethod().getMethodName()+ "is skipped. </b>" + " "+ICON_SMILEY_SKIP);
     }
 
     @Override
