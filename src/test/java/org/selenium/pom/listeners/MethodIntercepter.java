@@ -15,6 +15,8 @@ public class MethodIntercepter  implements IMethodInterceptor {
     @Override
     public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext iTestContext) {
 
+
+
        List<Map<String,String>> list= ExcelUtils.getTestDetails();
         List<IMethodInstance> result = new ArrayList<>();
 
@@ -25,7 +27,7 @@ public class MethodIntercepter  implements IMethodInterceptor {
 
                if(methods.get(i).getMethod().getMethodName().equalsIgnoreCase(list.get(j).get("testname"))){
                 if(list.get(j).get("execute").equalsIgnoreCase("yes")){
-
+                    methods.get(i).getMethod().setInvocationCount(Integer.parseInt(list.get(j).get("testdescription")));
                     methods.get(i).getMethod().setInvocationCount(Integer.parseInt(list.get(j).get("count")));
                     result.add(methods.get(i));
                 }
