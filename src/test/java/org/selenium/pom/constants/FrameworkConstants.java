@@ -7,6 +7,7 @@ public final class FrameworkConstants {
 
     private FrameworkConstants(){}
 
+
     private static final String EXCEL_PATH = System.getProperty("user.dir")+"/src/test/resources/excel/testdataupdated.xlsx";
     public static final String ICON_SOCIAL_LINKEDIN_URL = "https://www.linkedin.com/in/rashmi-soundar-22a62276/";
     public static final String ICON_SOCIAL_GITHUB_URL = "https://github.com/rashmiiyengar";
@@ -17,6 +18,8 @@ public final class FrameworkConstants {
 
     public static String extentReportFilePath = "";
     public static final String EXTENTREPORTPATH = System.getProperty("user.dir")+"/extent-test-output";
+    public static String sheetName = "RUNMANAGER";
+
 
     public static String getExtentreportpath(){
             if(extentReportFilePath.isEmpty()){
