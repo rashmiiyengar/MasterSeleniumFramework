@@ -21,6 +21,7 @@ public final class FrameworkConstants {
             + "'><i class='fa fa-linkedin-square' style='font-size:24px'></i></a>";
     public static final String ICON_SOCIAL_GITHUB = "<a href='" + ICON_SOCIAL_GITHUB_URL
             + "'><i class='fa fa-github-square' style='font-size:24px'></i></a>";
+    public static final String ICON_BUG = "<i class='fa fa-bug' ></i>";
 
     public static String extentReportFilePath = "";
     private static final String EXCEL_PATH = System.getProperty("user.dir")+"/src/test/resources/excel/testdataupdated.xlsx";
