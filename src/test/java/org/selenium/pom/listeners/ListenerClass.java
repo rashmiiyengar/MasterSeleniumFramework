@@ -1,5 +1,8 @@
 package org.selenium.pom.listeners;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.selenium.pom.extentreports.ExtentLogger;
 import org.selenium.pom.extentreports.ExtentReport;
 import org.selenium.pom.utils.ConfigLoader;
@@ -21,17 +24,27 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         // Code to execute when a test passes
-        ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed. ");
-        ExtentLogger.pass(result.getMethod().getMethodName()+ "is passed. </b>" + " "+ICON_SMILEY_PASS,true);
+        String log_text = "<b>" + result.getMethod().getMethodName() + " is passed. </b>" + " " + ICON_SMILEY_PASS;
+        Markup markupMessage = MarkupHelper.createLabel(log_text, ExtentColor.GREEN);
+        ExtentLogger.pass(markupMessage,true);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         // Code to execute when a test fails
-        //attach screenshot when failed
-        ExtentLogger.fail(result.getMethod().getMethodName()+ "is failed. </b>"+" "+ICON_SMILEY_FAIL,true);
-        ExtentLogger.fail(result.getThrowable().toString());
-        ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
+        // attach screenshot when failed
+
+        ExtentLogger.fail(ICON_BUG+ " " +"<b> <i>" +result.getThrowable().toString()+ "</i></b>");
+        String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
+        String message = "<details><summary><b><font color=red> Exception occured, click to see details: "
+                + ICON_SMILEY_FAIL + " </font></b>" + "</summary>" + exceptionMessage.replaceAll(",", "<br>")
+                + "</details> \n";
+        ExtentLogger.fail(message);
+
+        String log_text= "<b>" +result.getMethod().getMethodName()+ "is failed. </b>"+" "+ICON_SMILEY_FAIL;
+        Markup markup_message = MarkupHelper.createLabel(log_text, ExtentColor.RED);
+        ExtentLogger.fail(markup_message, true);
+
     }
 
     @Override

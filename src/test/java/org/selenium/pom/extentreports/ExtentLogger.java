@@ -5,12 +5,16 @@ import org.selenium.pom.utils.ConfigLoader;
 import org.selenium.pom.utils.ScreenshotUtils;
 
 import static org.apache.commons.lang3.BooleanUtils.YES;
-
+import com.aventstack.extentreports.markuputils.Markup;
 public final class ExtentLogger {
 
     private ExtentLogger(){}
 
     public  static void pass(String message){
+        ExtentManager.getExtentTest().pass(message);
+    }
+
+    public static void pass(Markup message) {
         ExtentManager.getExtentTest().pass(message);
     }
 
@@ -20,6 +24,9 @@ public final class ExtentLogger {
 
     }
 
+    public static void fail(Markup message) {
+        ExtentManager.getExtentTest().fail(message);
+    }
     public static void skip(String message){
         ExtentManager.getExtentTest().skip(message);
     }
@@ -29,6 +36,24 @@ public final class ExtentLogger {
                 && isScreeshotNeeded) {
             ExtentManager.getExtentTest().pass(message,
                     MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+        } else {
+            pass(message);
+        }
+    }
+
+    public static void pass(Markup message, boolean isScreeshotNeeded) {
+        // if
+        // (PropertyUtils.get(ConfigProperties.PASSED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
+        // && isScreeshotNeeded) {
+        if (ConfigLoader.getInstanceMethod().getPassedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
+            /*
+             * ExtentManager.getExtentTest().pass(message,
+             * MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.
+             * getBase64Image()).build());
+             */
+            ExtentManager.getExtentTest().pass(
+                    MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+            ExtentManager.getExtentTest().pass(message);
         } else {
             pass(message);
         }
@@ -47,5 +72,23 @@ public final class ExtentLogger {
         }
     }
 
+
+    public static void fail(Markup message, boolean isScreeshotNeeded) {
+        // if
+        // (PropertyUtils.get(ConfigProperties.FAILED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
+        // && isScreeshotNeeded) {
+        if (ConfigLoader.getInstanceMethod().getFailedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
+            /*
+             * ExtentManager.getExtentTest().fail(message,
+             * MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.
+             * getBase64Image()).build());
+             */
+            ExtentManager.getExtentTest().fail(
+                    MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+            ExtentManager.getExtentTest().fail(message);
+        } else {
+            fail(message);
+        }
+    }
 
 }
