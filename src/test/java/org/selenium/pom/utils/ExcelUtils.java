@@ -1,5 +1,6 @@
 package org.selenium.pom.utils;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -26,7 +27,7 @@ public final class ExcelUtils {
             XSSFSheet sheet = workbook.getSheet(sheetName);
 
             System.out.println("workbook" +workbook);
-            System.out.println("sheet name" +sheet.getRow(1).getCell(2).getStringCellValue());
+           // System.out.println("sheet name" +sheet.getRow(1).getCell(2).getStringCellValue());
 
             if (sheet == null) {
                 throw new IllegalArgumentException("Sheet with name '" + FrameworkConstants.getRunmangersheet() + "' does not exist.");
@@ -44,7 +45,7 @@ public final class ExcelUtils {
 
                 for (int j = 0; j < lastColNum; j++) {
                     String key = sheet.getRow(0).getCell(j).getStringCellValue();
-                    String value = row.getCell(j).getCellType() == CellType.BLANK ? "" : row.getCell(j).getStringCellValue();
+                    String value = getCellStringValue(row.getCell(j)); // Use method to get cell value
                     map.put(key, value);
                 }
                 list.add(map);
@@ -53,7 +54,9 @@ public final class ExcelUtils {
             throw new RuntimeException("Error reading Excel file", e);
         } finally {
             try {
-
+                if (workbook != null) {
+                    workbook.close(); // Close workbook in finally block
+                }
                 if (fileInputStream != null) {
                     fileInputStream.close();
                 }
@@ -65,6 +68,19 @@ public final class ExcelUtils {
         return list;
     }
 
+    private static String getCellStringValue(XSSFCell cell) {
+        if (cell == null) {
+            return "";
+        }
+        return switch (cell.getCellType()) {
+            case STRING -> cell.getStringCellValue();
+            case NUMERIC ->
+                // Handle numeric values
+                    String.valueOf(cell.getNumericCellValue());
+            case BOOLEAN -> String.valueOf(cell.getBooleanCellValue());
+            default -> "";
+        };
+    }
 
     private static boolean isRowEmpty(XSSFRow row) {
         if (row == null) {

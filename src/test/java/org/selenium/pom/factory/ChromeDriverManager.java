@@ -13,8 +13,8 @@ public class ChromeDriverManager implements DriverManager_OC {
     public WebDriver createDriver() {
         WebDriverManager.chromedriver().clearDriverCache();
         WebDriverManager.chromedriver().cachePath("Drivers").setup();
-     WebDriver  driver=  new ChromeDriver();
-       driver.manage().window().maximize();
+        WebDriver  driver=  new ChromeDriver();
+        driver.manage().window().maximize();
         return driver;
     }
 
