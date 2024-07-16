@@ -18,7 +18,7 @@ public class ListenerClass implements ITestListener , ISuiteListener {
 
     public void onTestStart(ITestResult result) {
         // Code to execute before each test starts
-            ExtentReport.createTest(result.getMethod().getMethodName());
+            ExtentReport.createTest(result.getMethod().getDescription());
     }
 
     @Override
