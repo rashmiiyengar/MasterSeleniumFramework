@@ -1,18 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite1" verbose="1" parallel="tests" thread-count="2" >
+<suite name="STAGE" verbose="1" parallel="methods" thread-count="5">
 
     <listeners>
         <listener class-name="org.selenium.pom.listeners.ListenerClass"/>
-        <listener class-name="org.selenium.pom.listeners.MethodIntercepter"/>
+
     </listeners>
-    <test name="Regression" parallel="methods" thread-count="6">
-        <!--        <packages>-->
-        <!--            <package name="org.selenium.pom.tests"/>-->
-        <!--        </packages>-->
+    <test name="Smoke Test" thread-count="5">
         <parameter name="browser" value="CHROME"/>
 <!--       <packages>-->
-<!--           <package name="org.selenium.pom.tests.AddToCartTest"/>-->
+<!--           <package name="org.selenium.pom.tests"/>-->
 <!--       </packages>-->
 
         <classes>

@@ -27,6 +27,10 @@ public class BaseTest {
     @BeforeMethod
     public synchronized void startDriver(String browser){
       // setDriver(new DriverManagerOriginal().initializeDriver(browser));
+
+
+        // Clear WebDriverManager cache before setting up the driver
+
         setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
         System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +driver);
 

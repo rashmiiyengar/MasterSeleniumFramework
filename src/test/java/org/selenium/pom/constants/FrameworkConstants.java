@@ -28,7 +28,7 @@ public final class FrameworkConstants {
 
     public static final String EXTENTREPORTPATH = System.getProperty("user.dir")+"/extent-test-output";
 
-
+    private static final String Project_Name = "Automation Test Suite Report - Master Selenium Framework";
 
     private static final String RUNMANGERSHEET = "RUNMANAGER";
 
@@ -58,6 +58,10 @@ public final class FrameworkConstants {
     }
     public static String getRunmangersheet() {
         return RUNMANGERSHEET;
+    }
+
+    public static String getProjectName() {
+        return Project_Name;
     }
 
 }

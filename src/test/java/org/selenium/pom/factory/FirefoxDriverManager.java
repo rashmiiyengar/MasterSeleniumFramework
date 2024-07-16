@@ -8,6 +8,7 @@ public class FirefoxDriverManager implements DriverManager_OC {
 
     @Override
     public WebDriver  createDriver() {
+        WebDriverManager.firefoxdriver().clearDriverCache();
         WebDriverManager.firefoxdriver().cachePath("Drivers").setup();
         WebDriver driver=  new FirefoxDriver();
         driver.manage().window().maximize();
