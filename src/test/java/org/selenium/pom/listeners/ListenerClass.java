@@ -6,9 +6,11 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.selenium.pom.extentreports.ExtentLogger;
 import org.selenium.pom.extentreports.ExtentReport;
 import org.selenium.pom.utils.ConfigLoader;
+import org.selenium.pom.utils.EmailSendUtils;
 import org.selenium.pom.utils.PropertyUtils;
 import org.testng.*;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -16,14 +18,28 @@ import static org.selenium.pom.constants.FrameworkConstants.*;
 
 public class ListenerClass implements ITestListener , ISuiteListener {
 
+
+    static int count_passedTCs;
+    static int count_skippedTCs;
+    static int count_failedTCs;
+    static int count_totalTCs;
+
+
     public void onTestStart(ITestResult result) {
         // Code to execute before each test starts
-            ExtentReport.createTest(result.getMethod().getDescription());
+        count_totalTCs++;
+        String testDescription = result.getMethod().getDescription();
+        if (testDescription != null) {
+            ExtentReport.createTest(testDescription);
+        } else {
+            ExtentReport.createTest(result.getMethod().getMethodName());
+        }
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         // Code to execute when a test passes
+        count_passedTCs = count_passedTCs + 1;
         String log_text = "<b>" + result.getMethod().getMethodName() + " is passed. </b>" + " " + ICON_SMILEY_PASS;
         Markup markupMessage = MarkupHelper.createLabel(log_text, ExtentColor.GREEN);
         ExtentLogger.pass(markupMessage,true);
@@ -33,7 +49,7 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     public void onTestFailure(ITestResult result) {
         // Code to execute when a test fails
         // attach screenshot when failed
-
+        count_failedTCs = count_failedTCs + 1;
         ExtentLogger.fail(ICON_BUG+ " " +"<b> <i>" +result.getThrowable().toString()+ "</i></b>");
         String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
         String message = "<details><summary><b><font color=red> Exception occured, click to see details: "
@@ -49,7 +65,8 @@ public class ListenerClass implements ITestListener , ISuiteListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        // Code to execute when a test is skipped
+        // Code to execute when a test is
+        count_skippedTCs = count_skippedTCs + 1;
         ExtentLogger.skip(result.getMethod().getMethodName()+ "is skipped. </b>" + " "+ICON_SMILEY_SKIP);
     }
 
@@ -85,7 +102,10 @@ public class ListenerClass implements ITestListener , ISuiteListener {
         // Code to execute after the suite finishes
         try {
             ExtentReport.flushReports();
+            EmailSendUtils.sendEmail(count_totalTCs, count_passedTCs, count_failedTCs, count_skippedTCs);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }

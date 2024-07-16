@@ -7,6 +7,7 @@ import java.util.Properties;
 public class ConfigLoader {
 
     private static final String ENV = "env";
+    private static final String SEND_EMAIL_TO_USERS = "send_email_to_users";
     private static final String CONFIG_PROPERTIES = "_config.properties";
     private static final String OVERRIDE_REPORTS = "override_reports";
 
@@ -82,5 +83,9 @@ public class ConfigLoader {
 
     public String getOverrideReports() {
         return getPropertyValue(OVERRIDE_REPORTS);
+    }
+
+    public String getSendEmailToUsers() {
+        return getPropertyValue(SEND_EMAIL_TO_USERS);
     }
 }

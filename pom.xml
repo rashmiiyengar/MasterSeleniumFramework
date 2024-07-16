@@ -39,11 +39,13 @@
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.21.0</version>
+            <version>4.22.0</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
@@ -59,15 +61,13 @@
             <version>1.2.3</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
-
             <groupId>io.github.bonigarcia</groupId>
-
             <artifactId>webdrivermanager</artifactId>
-
-            <version>5.6.2</version>
-
+            <version>5.9.1</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
@@ -158,6 +158,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-java -->
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.1</version>
         </dependency>
 
     </dependencies>
