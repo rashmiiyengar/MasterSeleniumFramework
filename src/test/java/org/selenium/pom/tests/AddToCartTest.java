@@ -39,7 +39,7 @@ public class AddToCartTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(enabled = true)
     public void addToCartFromProductPage() throws IOException {
 
         Product product = new Product(1215);

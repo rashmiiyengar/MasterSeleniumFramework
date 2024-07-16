@@ -24,9 +24,13 @@ public final class FrameworkConstants {
     public static final String ICON_BUG = "<i class='fa fa-bug' ></i>";
 
     public static String extentReportFilePath = "";
-    private static final String EXCEL_PATH = System.getProperty("user.dir")+"/src/test/resources/excel/testdataupdated.xlsx";
+    private static final String EXCEL_PATH = System.getProperty("user.dir") + "/src/test/resources/excel/testdatasheet.xlsx";
+
     public static final String EXTENTREPORTPATH = System.getProperty("user.dir")+"/extent-test-output";
-    public static String sheetName = "RUNMANAGER";
+
+
+
+    private static final String RUNMANGERSHEET = "RUNMANAGER";
 
 
     public static String getExtentreportpath(){
@@ -48,8 +52,12 @@ public final class FrameworkConstants {
     }
 
     public static String getExcelPath() {
+        System.out.println("Excel file path: " + EXCEL_PATH);
         return EXCEL_PATH;
-    }
 
+    }
+    public static String getRunmangersheet() {
+        return RUNMANGERSHEET;
+    }
 
 }
