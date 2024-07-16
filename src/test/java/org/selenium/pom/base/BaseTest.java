@@ -11,8 +11,10 @@ import org.testng.annotations.*;
 
 import java.util.List;
 
+import static org.selenium.pom.factory.DriverManager.unload;
+
 public class BaseTest {
-    private ThreadLocal<WebDriver>  driver= new ThreadLocal<>();
+    //private ThreadLocal<WebDriver>  driver= new ThreadLocal<>();
 
     protected WebDriver getDriver() {
         return DriverManager.getDriver();
@@ -27,19 +29,21 @@ public class BaseTest {
     @BeforeMethod
     public synchronized void startDriver(String browser){
       // setDriver(new DriverManagerOriginal().initializeDriver(browser));
-
-
-        // Clear WebDriverManager cache before setting up the driver
-
-        setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
-        System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +driver);
-
+        synchronized (this){
+            setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
+            System.out.println("CURRENT THREAD : " +Thread.currentThread().getName()+ "DRIVER " +getDriver());
+        }
     }
 
     @AfterMethod
-    public synchronized void quitDriver(){
+    public void quitDriver(){
+        synchronized (this){
+            if(getDriver()!=null){
+                getDriver().quit();
+            }
 
-        getDriver().quit();
+            unload();
+        }
 
     }
 

@@ -28,7 +28,7 @@ protected void load(String endPoint){
 
 protected void waitForElementToDisappear(By element) {
     List<WebElement> overlays = driver.findElements(element);
-    System.out.println(overlays.size());
+    System.out.println("overlays" +overlays.size());
     if (overlays.size() > 0) {
         waitLong.until(
                 ExpectedConditions.invisibilityOfAllElements(overlays)
