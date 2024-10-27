@@ -25,18 +25,14 @@ public class AddToCartTest extends BaseTest {
                 clickViewCarkLink();
 
         Assert.assertEquals(cartpage.getProductName(),product.getName());
-
     }
 
     @Test
     public void addFeaturedProductToCart() throws IOException {
-
         Product product = new Product(1215);
 
        new HomePage(getDriver()).
                 load().getProductThumbnail().clickAddToCartButton(product.getName()).clickViewCarkLink();
-
-
     }
 
     @Test(enabled = true)

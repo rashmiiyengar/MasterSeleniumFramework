@@ -4,7 +4,7 @@
 
     <listeners>
         <listener class-name="org.selenium.pom.listeners.ListenerClass"/>
-        <listener class-name="org.selenium.pom.listeners.MethodIntercepter"/>
+
     </listeners>
     <test name="Smoke Test" thread-count="5">
         <parameter name="browser" value="CHROME"/>
@@ -14,6 +14,8 @@
 
         <classes>
             <class name="org.selenium.pom.tests.AddToCartTest"/>
+
+
         </classes>
     </test>
 </suite>
