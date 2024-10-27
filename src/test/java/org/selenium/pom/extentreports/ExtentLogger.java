@@ -1,5 +1,6 @@
 package org.selenium.pom.extentreports;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import org.selenium.pom.utils.ConfigLoader;
 import org.selenium.pom.utils.ScreenshotUtils;
@@ -11,21 +12,47 @@ public final class ExtentLogger {
     private ExtentLogger(){}
 
     public  static void pass(String message){
-        ExtentManager.getExtentTest().pass(message);
+        ExtentTest extentTest = ExtentManager.getExtentTest();
+        if (extentTest != null) {
+            extentTest.pass(message);
+        } else {
+            throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+        }
+        //ExtentManager.getExtentTest().pass(message);
     }
 
     public static void pass(Markup message) {
-        ExtentManager.getExtentTest().pass(message);
+
+        ExtentTest extentTest = ExtentManager.getExtentTest();
+        if (extentTest != null) {
+            extentTest.pass(message);
+        } else {
+            throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+        }
+       // ExtentManager.getExtentTest().pass(message);
     }
 
     public static void fail(String message){
 
-        ExtentManager.getExtentTest().fail(message);
+        ExtentTest extentTest = ExtentManager.getExtentTest();
+        if (extentTest != null) {
+            extentTest.fail(message);
+        } else {
+            throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+        }
+
+       // ExtentManager.getExtentTest().fail(message);
 
     }
 
     public static void fail(Markup message) {
-        ExtentManager.getExtentTest().fail(message);
+        ExtentTest extentTest = ExtentManager.getExtentTest();
+        if (extentTest != null) {
+            extentTest.fail(message);
+        } else {
+            throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+        }
+        //ExtentManager.getExtentTest().fail(message);
     }
     public static void skip(String message){
         ExtentManager.getExtentTest().skip(message);
@@ -34,8 +61,16 @@ public final class ExtentLogger {
     public static void pass(String message, boolean isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getPassedStepsScreenshot().equalsIgnoreCase(YES)
                 && isScreeshotNeeded) {
-            ExtentManager.getExtentTest().pass(message,
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+
+            ExtentTest extentTest = ExtentManager.getExtentTest();
+            if (extentTest != null) {
+                ExtentManager.getExtentTest().pass(message,
+                        MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+            } else {
+                throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+            }
+
+
         } else {
             pass(message);
         }
@@ -43,6 +78,7 @@ public final class ExtentLogger {
 
     public static void pass(Markup message, boolean isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getPassedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
+
 
             ExtentManager.getExtentTest().pass(
                     MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
@@ -66,9 +102,16 @@ public final class ExtentLogger {
     public static void fail(Markup message, boolean isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getFailedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
 
-            ExtentManager.getExtentTest().fail(
-                    MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
-            ExtentManager.getExtentTest().fail(message);
+            ExtentTest extentTest = ExtentManager.getExtentTest();
+            if (extentTest != null) {
+                ExtentManager.getExtentTest().fail(
+                        MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+                ExtentManager.getExtentTest().fail(message);
+            } else {
+                throw new IllegalStateException("ExtentTest is not initialized. Call createTest before logging.");
+            }
+
+
         } else {
             fail(message);
         }

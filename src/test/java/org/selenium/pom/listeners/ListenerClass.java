@@ -1,5 +1,6 @@
 package org.selenium.pom.listeners;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -34,6 +35,7 @@ public class ListenerClass implements ITestListener , ISuiteListener {
         } else {
             ExtentReport.createTest(result.getMethod().getMethodName());
         }
+        System.out.println("Extent report created " +result.getMethod().getMethodName());
     }
 
     @Override
@@ -94,6 +96,7 @@ public class ListenerClass implements ITestListener , ISuiteListener {
     @Override
     public void onStart(ISuite suite) {
         // Code to execute before the suite starts
+        System.out.println("Suite started: " + suite.getName());
         ExtentReport.initReports();
     }
 

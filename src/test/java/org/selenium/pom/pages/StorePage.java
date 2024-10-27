@@ -24,7 +24,7 @@ public class StorePage extends BasePage {
 
     public StorePage(WebDriver driver) {
         super(driver);
-        new ProductThumbnail(driver);
+       this.productThumbnail= new ProductThumbnail(driver);
     }
 
     public StorePage enterTextInSearchField(String txt){
