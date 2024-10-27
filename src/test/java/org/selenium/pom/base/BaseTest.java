@@ -39,12 +39,12 @@ public class BaseTest {
     public void quitDriver(){
         synchronized (this){
             if(getDriver()!=null){
+                //removes the driver instance from ThreadLocal for the current thread,
+                //releasing resources and avoiding memory leaks.
                 getDriver().quit();
             }
-
             unload();
         }
-
     }
 
     public void injectCookiesToBrowser(Cookies cookies){

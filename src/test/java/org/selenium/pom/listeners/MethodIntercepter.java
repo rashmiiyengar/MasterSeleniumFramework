@@ -5,13 +5,11 @@ import org.selenium.pom.utils.ExcelUtils;
 import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MethodIntercepter  implements IMethodInterceptor {
-
 
     @Override
     public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext iTestContext) {
@@ -31,7 +29,6 @@ public class MethodIntercepter  implements IMethodInterceptor {
 
                     result.add(method);
                 }
-
             }
 
         }

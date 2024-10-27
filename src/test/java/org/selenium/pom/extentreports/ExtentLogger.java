@@ -42,15 +42,8 @@ public final class ExtentLogger {
     }
 
     public static void pass(Markup message, boolean isScreeshotNeeded) {
-        // if
-        // (PropertyUtils.get(ConfigProperties.PASSED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
-        // && isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getPassedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
-            /*
-             * ExtentManager.getExtentTest().pass(message,
-             * MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.
-             * getBase64Image()).build());
-             */
+
             ExtentManager.getExtentTest().pass(
                     MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
             ExtentManager.getExtentTest().pass(message);
@@ -60,9 +53,6 @@ public final class ExtentLogger {
     }
 
     public static void fail(String message, boolean isScreeshotNeeded) {
-        // if
-        // (PropertyUtils.get(ConfigProperties.FAILED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
-        // && isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getFailedStepsScreenshot().equalsIgnoreCase(YES)
                 && isScreeshotNeeded) {
             ExtentManager.getExtentTest().fail(message,
@@ -74,15 +64,8 @@ public final class ExtentLogger {
 
 
     public static void fail(Markup message, boolean isScreeshotNeeded) {
-        // if
-        // (PropertyUtils.get(ConfigProperties.FAILED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
-        // && isScreeshotNeeded) {
         if (ConfigLoader.getInstanceMethod().getFailedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
-            /*
-             * ExtentManager.getExtentTest().fail(message,
-             * MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.
-             * getBase64Image()).build());
-             */
+
             ExtentManager.getExtentTest().fail(
                     MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
             ExtentManager.getExtentTest().fail(message);
