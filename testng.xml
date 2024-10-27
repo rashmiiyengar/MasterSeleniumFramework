@@ -13,6 +13,8 @@
 
         <classes>
             <class name="org.selenium.pom.tests.CheckoutTest"/>
+            <class name="org.selenium.pom.tests.AddToCartTest"/>
+            <class name="org.selenium.pom.tests.NavigationTest"/>
         </classes>
     </test>
 </suite>

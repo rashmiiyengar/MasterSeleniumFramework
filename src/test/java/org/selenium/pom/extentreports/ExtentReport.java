@@ -44,7 +44,7 @@ public final class ExtentReport {
         }
     }
 
-    public static void createTest(String testcaseName){
+    public static void createReportTest(String testcaseName){
      ExtentTest test=  extentReport.createTest(testcaseName);
      ExtentManager.setExtentTest(test);
     }
