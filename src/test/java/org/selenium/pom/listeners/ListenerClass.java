@@ -30,11 +30,12 @@ public class ListenerClass implements ITestListener , ISuiteListener {
         // Code to execute before each test starts
         count_totalTCs++;
         String testDescription = result.getMethod().getDescription();
-        if (testDescription != null) {
-            ExtentReport.createTest(testDescription);
-        } else {
-            ExtentReport.createTest(result.getMethod().getMethodName());
-        }
+        ExtentReport.createReportTest(result.getMethod().getMethodName());
+//        if (testDescription != null) {
+//            ExtentReport.createReportTest(testDescription);
+//        } else {
+//            ExtentReport.createReportTest(result.getMethod().getMethodName());
+//        }
         System.out.println("Extent report created " +result.getMethod().getMethodName());
     }
 
