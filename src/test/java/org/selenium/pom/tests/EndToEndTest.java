@@ -7,13 +7,15 @@ import org.selenium.pom.objects.User;
 import org.selenium.pom.pages.*;
 import org.selenium.pom.utils.JacksonUtil;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-
+@Listeners(org.selenium.pom.listeners.ListenerClass.class)
 public class EndToEndTest extends BaseTest {
 
-   // @Test
+    @Test
+
     public void loginWithUserAndCheckout() throws InterruptedException, IOException {
 
         BillingAddress billingAddress= JacksonUtil.deserializeJson("myBillingSAddress.json",BillingAddress.class);

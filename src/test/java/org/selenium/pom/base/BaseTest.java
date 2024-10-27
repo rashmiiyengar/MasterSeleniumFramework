@@ -27,7 +27,7 @@ public class BaseTest {
 
     @Parameters("browser")
     @BeforeMethod
-    public synchronized void startDriver(String browser){
+    public synchronized void startDriver(@Optional("chrome") String browser){
       // setDriver(new DriverManagerOriginal().initializeDriver(browser));
         synchronized (this){
             setDriver(DriverManagerFactory.getManager(DriverType.valueOf(browser)).createDriver());
